@@ -27,6 +27,7 @@ legacy_tox_ini = """
 
 [tox]
 envlist = py38, py39, py310
+isolated_build = True
 
 [gh-actions]
 python =
@@ -36,7 +37,6 @@ python =
 
 [testenv]
 alwayscopy = true
-isolated_build = true
 description = Check syntax and run tests
 require_locked_deps = true
 install_dev_deps = true
