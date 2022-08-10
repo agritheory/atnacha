@@ -1,5 +1,5 @@
-from .nacha import (
-	ACHEntry,
-	ACHBatch,
-	NACHAFile,
+from atnacha.nacha import (
+    ACHEntry,
+    ACHBatch,
+    NACHAFile,
 )
