@@ -27,6 +27,7 @@ legacy_tox_ini = """
 
 [tox]
 envlist = py38, py39, py310, mypy
+isolated_build = true
 
 [gh-actions]
 python =
