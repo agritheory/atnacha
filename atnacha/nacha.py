@@ -143,7 +143,7 @@ class ACHEntry:
 
 	def __str__(self):
 		# position 1 2-3                      4-11                                    12                13-29                         30-39            40-54                            55-76                           77-78                        79
-		return f"""6{self.transaction_code:02}{self.receiving_dfi_identification}{self.check_digit}{self.dfi_account_number: <17}{self.amount:010}{self.individual_id_number: <15}{self.individual_name[0:22]: <22}{self.discretionary_data: <2}{self.addenda_record_indicator}"""
+		return f"""6{self.transaction_code:02}{self.receiving_dfi_identification:08}{self.check_digit}{self.dfi_account_number: <17}{self.amount:010}{self.individual_id_number: <15}{self.individual_name[0:22]: <22}{self.discretionary_data: <2}{self.addenda_record_indicator}"""
 
 	def __call__(self):
 		return self.__str__()
