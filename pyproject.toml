@@ -26,7 +26,7 @@ packages = [
 legacy_tox_ini = """
 
 [tox]
-envlist = py{38, 39, 310}-{linux,macos,windows}
+envlist = py{38,39,310}-{linux,macos,windows}
 isolated_build = True
 requires =
   tox-gh-actions
