@@ -26,7 +26,7 @@ packages = [
 legacy_tox_ini = """
 
 [tox]
-envlist = py{38,39,310}-{linux,macos,windows}
+envlist = py{38,39,310}-{linux,macos}
 isolated_build = True
 requires =
   tox-gh-actions
@@ -42,7 +42,6 @@ python =
 PLATFORM =
     ubuntu-latest: linux
     macos-latest: macos
-    windows-latest: windows
 
 [testenv]
 alwayscopy = true
