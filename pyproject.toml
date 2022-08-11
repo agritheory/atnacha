@@ -11,6 +11,8 @@ python = "^3.8"
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.5"
 pytest-coverage = "^0.0"
+mypy = "^0.971"
+pytest-mypy = "^0.9.1"
 tox-poetry-installer = {extras = ["poetry"], version = "^0.8.4"}
 tox-gh-actions = "^2.9.1"
 
@@ -34,11 +36,6 @@ python =
     3.9: py39
     3.10: py310
 
-[gh-actions:env]
-PLATFORM =
-    ubuntu-latest: linux
-    macos-latest: macos
-
 [testenv]
 alwayscopy = true
 description = Check syntax and run tests
@@ -46,5 +43,5 @@ require_locked_deps = true
 install_dev_deps = true
 commands =
     poetry run black . --check
-    poetry run pytest --cov=./ --cov-report=xml
+    poetry run pytest --cov=./ --cov-report=html --mypy
 """
