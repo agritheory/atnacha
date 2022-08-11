@@ -11,6 +11,8 @@ python = "^3.8"
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.5"
 pytest-coverage = "^0.0"
+tox-poetry-installer = {extras = ["poetry"], version = "^0.8.4"}
+tox-gh-actions = "^2.9.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -19,3 +21,30 @@ build-backend = "poetry.core.masonry.api"
 packages = [
     { include = "atnacha" },
 ]
+
+[tool.tox]
+legacy_tox_ini = """
+
+[tox]
+isolated_build = True
+
+[gh-actions]
+python =
+    3.8: py38
+    3.9: py39
+    3.10: py310
+
+[gh-actions:env]
+PLATFORM =
+    ubuntu-latest: linux
+    macos-latest: macos
+
+[testenv]
+alwayscopy = true
+description = Check syntax and run tests
+require_locked_deps = true
+install_dev_deps = true
+commands =
+    poetry run black . --check
+    poetry run pytest --cov=./ --cov-report=xml
+"""
