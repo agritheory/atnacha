@@ -59,7 +59,7 @@ class NACHAFile:
     @property
     def header(self) -> str:
         # position 1 2-3                   4-13                             14-23                       24-29                                     30-33                                   34                     35-37                 38-39                   40                 41-63                            64-86                       87-94
-        return f"""1{self.priority_code:02}{self.immediate_destination: >10}{self.immediate_origin: >10}{self.file_creation_date.strftime('%y%m%d')}{self.file_creation_time.strftime('%H%M')}{self.file_id_modifier}{self.record_size:003}{self.blocking_factor:02}{self.format_code}{self.immediate_destination_name: <23}{self.immediate_origin_name: <23}{self.reference_code: >8}"""
+        return f"""1{self.priority_code:02}{self.immediate_destination[:10]: >10}{self.immediate_origin[:10]: >10}{self.file_creation_date.strftime('%y%m%d')}{self.file_creation_time.strftime('%H%M')}{self.file_id_modifier}{self.record_size:003}{self.blocking_factor:02}{self.format_code}{self.immediate_destination_name[:23]: <23}{self.immediate_origin_name[:23]: <23}{self.reference_code: >8}"""
 
     @property
     def control(self) -> str:
