@@ -10,7 +10,6 @@ def example_entry_0():
     return ACHEntry(
         transaction_code=32,
         receiving_dfi_identification="07200080",
-        check_digit=5,
         dfi_account_number="7548332",
         amount=5000,
         individual_id_number="",
@@ -25,7 +24,6 @@ def example_entry_1():
     return ACHEntry(
         transaction_code=22,
         receiving_dfi_identification="07200080",
-        check_digit=5,
         dfi_account_number="1254356",
         amount=26294,
         individual_id_number="",
@@ -40,7 +38,6 @@ def example_entry_2():
     return ACHEntry(
         transaction_code=32,
         receiving_dfi_identification="07200091",
-        check_digit=5,
         dfi_account_number="45876523",
         amount=10000,
         individual_id_number="",
@@ -55,7 +52,6 @@ def example_entry_3():
     return ACHEntry(
         transaction_code=32,
         receiving_dfi_identification="07200080",
-        check_digit=5,
         dfi_account_number="954632",
         amount=2500,
         individual_id_number="",
@@ -70,7 +66,6 @@ def example_entry_4():
     return ACHEntry(
         transaction_code=32,
         receiving_dfi_identification="07200080",
-        check_digit=5,
         dfi_account_number="9875342",
         amount=2799,
         individual_id_number="",
@@ -85,7 +80,6 @@ def example_entry_5():
     return ACHEntry(
         transaction_code=32,
         receiving_dfi_identification="27248012",
-        check_digit=8,
         dfi_account_number="857654324",
         amount=14919,
         individual_id_number="",
@@ -100,7 +94,6 @@ def example_entry_6():
     return ACHEntry(
         transaction_code=22,
         receiving_dfi_identification="27248012",
-        check_digit=8,
         dfi_account_number="87543",
         amount=44759,
         individual_id_number="",
@@ -115,7 +108,6 @@ def example_entry_7():
     return ACHEntry(
         transaction_code=22,
         receiving_dfi_identification="27248012",
-        check_digit=8,
         dfi_account_number="5239465",
         amount=39059,
         individual_id_number="",
@@ -129,8 +121,7 @@ def example_entry_7():
 def example_entry_8():
     return ACHEntry(
         transaction_code=27,
-        receiving_dfi_identification="07200091",
-        check_digit=5,
+        receiving_dfi_identification="072000915", # with check_digit value of 5,
         dfi_account_number="723458745",
         amount=145330,
         individual_id_number="",
