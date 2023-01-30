@@ -177,7 +177,6 @@ class ACHBatch:
 class ACHEntry:
     transaction_code: int = 0
     receiving_dfi_identification: str = ""
-    check_digit: int = 0
     dfi_account_number: str = ""
     amount: int = 0  # in cents
     individual_id_number: str = ""
@@ -186,9 +185,34 @@ class ACHEntry:
     addenda_record_indicator: str = ""
     batch: Optional['ACHBatch'] = None
 
+    @property
+    def check_digit(self) -> int:
+        """
+        Multiply the first digit by 3, the second digit by 7 and the third digit by 1.
+        Then, multiply the fourth digit by 3, the fifth digit by 7 and the sixth digit by 1.
+        Then, multiply the seventh digit by 3, the eighth digit by 7 and the ninth digit by 1.
+        """
+        if not self.receiving_dfi_identification:
+            return 0
+        if len(self.receiving_dfi_identification) == 9: 
+            return self.receiving_dfi_identification[8]
+        # add check digit
+        s = sum([
+            int(self.receiving_dfi_identification[0]) * 3,
+            int(self.receiving_dfi_identification[1]) * 7,
+            int(self.receiving_dfi_identification[2]) * 1,
+            int(self.receiving_dfi_identification[3]) * 3,
+            int(self.receiving_dfi_identification[4]) * 7,
+            int(self.receiving_dfi_identification[5]) * 1,
+            int(self.receiving_dfi_identification[6]) * 3,
+            int(self.receiving_dfi_identification[7]) * 7
+        ])
+        return 10 - (s % 10)
+
+
     def __str__(self) -> str:
         # position 1 2-3                      4-11                                    12                13-29                         30-39            40-54                            55-76                           77-78                        79
-        return f"""6{self.transaction_code:02}{self.receiving_dfi_identification[0:8]}{self.check_digit}{self.dfi_account_number: <17}{self.amount:010}{self.individual_id_number: <15}{self.individual_name[0:22]: <22}{self.discretionary_data: <2}{self.addenda_record_indicator}"""
+        return f"""6{self.transaction_code:02}{self.receiving_dfi_identification[0:8]: <8}{self.check_digit}{self.dfi_account_number: <17}{self.amount:010}{self.individual_id_number: <15}{self.individual_name[0:22]: <22}{self.discretionary_data: <2}{self.addenda_record_indicator}"""
 
     def __call__(self) -> str:
         return self.__str__()
