@@ -107,7 +107,7 @@ def example_entry_6():
 def example_entry_7():
     return ACHEntry(
         transaction_code=22,
-        receiving_dfi_identification="27248012",
+        receiving_dfi_identification="00306102", # check_digit == 10, should modulus to 0
         dfi_account_number="5239465",
         amount=39059,
         individual_id_number="",
@@ -205,7 +205,7 @@ def test_entry_str(
     output_4 = "6320720008059875342          0000002799               Porter, Jack S          0"
     output_5 = "632272480128857654324        0000014919               Good, Rhonda            0"
     output_6 = "62227248012887543            0000044759               Good, Rhonda            0"
-    output_7 = "6222724801285239465          0000039059               Dunn, John              0"
+    output_7 = "6220030610205239465          0000039059               Dunn, John              0"
     output_8 = "627072000915723458745        0000145330               Anderson Enterprises I  0"
     assert output_0 == str(example_entry_0)
     assert output_1 == str(example_entry_1)
@@ -224,8 +224,8 @@ def test_batch_header(example_batch_0):
 
 
 def test_batch_control(example_batch_0):
-    output_0 = "820000000901249445380000001453300000001453301381655417                         07200091"
-    assert example_batch_0.entry_hash == "0124944538"
+    output_0 = "820000000900980026280000001453300000001453301381655417                         07200091"
+    assert example_batch_0.entry_hash == "0098002628"
     assert example_batch_0.total_credit == 145330
     assert example_batch_0.total_debit == 145330
     assert output_0 == example_batch_0.control
@@ -237,8 +237,8 @@ def test_ach_header(example_nacha_0):
 
 
 def test_ach_control(example_nacha_0):
-    output_0 = "9000001000002000000090124944538000000145330000000145330                                       "
-    assert example_nacha_0.entry_hash == "0124944538"
+    output_0 = "9000001000002000000090098002628000000145330000000145330                                       "
+    assert example_nacha_0.entry_hash == "0098002628"
     assert example_nacha_0.total_credit == 145330
     assert example_nacha_0.total_debit == 145330
     assert output_0 == example_nacha_0.control
@@ -253,10 +253,10 @@ complete_nacha_0 = """101 072000915 07200091502040412090094101First National Ban
 6320720008059875342          0000002799               Porter, Jack S          0072000910000005
 632272480128857654324        0000014919               Good, Rhonda            0072000910000006
 62227248012887543            0000044759               Good, Rhonda            0072000910000007
-6222724801285239465          0000039059               Dunn, John              0072000910000008
+6220030610205239465          0000039059               Dunn, John              0072000910000008
 627072000915723458745        0000145330               Anderson Enterprises I  0072000910000009
-820000000901249445380000001453300000001453301381655417                         072000910000001
-9000001000002000000090124944538000000145330000000145330                                       
+820000000900980026280000001453300000001453301381655417                         072000910000001
+9000001000002000000090098002628000000145330000000145330                                       
 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999

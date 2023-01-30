@@ -207,7 +207,7 @@ class ACHEntry:
             int(self.receiving_dfi_identification[6]) * 3,
             int(self.receiving_dfi_identification[7]) * 7
         ])
-        return 10 - (s % 10)
+        return (10 - (s % 10) ) % 10
 
 
     def __str__(self) -> str:
