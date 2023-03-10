@@ -115,7 +115,7 @@ class ACHBatch:
         )
         settlement_date = self.settlement_date if self.settlement_date else "   "
         # position 1 2-4                        5-20                    21-40                                 41-50                 51-53                        64-69                                           70-75                                       76-78                 79                           80-87                     88-94
-        return f"""5{self.service_class_code}{self.company_name[:16]: <16}{self.company_discretionary_data: <20}{self.company_id: <10}{self.standard_class_code: <3}{self.company_entry_description: <10}{company_descriptive_date}{self.effective_entry_date.strftime('%y%m%d')}{settlement_date}{self.originator_status_code}{self.originating_dfi_id[:8]}"""
+        return f"""5{self.service_class_code}{self.company_name[:16]: <16}{self.company_discretionary_data[:20]: <20}{self.company_id: <10}{self.standard_class_code: <3}{self.company_entry_description: <10}{company_descriptive_date}{self.effective_entry_date.strftime('%y%m%d')}{settlement_date}{self.originator_status_code}{self.originating_dfi_id[:8]}"""
 
     @property
     def control(self) -> str:
@@ -208,7 +208,6 @@ class ACHEntry:
             int(self.receiving_dfi_identification[7]) * 7
         ])
         return (10 - (s % 10) ) % 10
-
 
     def __str__(self) -> str:
         # position 1 2-3                      4-11                                    12                13-29                         30-39            40-54                            55-76                           77-78                        79
