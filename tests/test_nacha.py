@@ -107,7 +107,7 @@ def example_entry_6():
 def example_entry_7():
     return ACHEntry(
         transaction_code=22,
-        receiving_dfi_identification="00306102", # check_digit == 10, should modulus to 0
+        receiving_dfi_identification="00306102",  # check_digit == 10, should modulus to 0
         dfi_account_number="5239465",
         amount=39059,
         individual_id_number="",
@@ -121,7 +121,7 @@ def example_entry_7():
 def example_entry_8():
     return ACHEntry(
         transaction_code=27,
-        receiving_dfi_identification="072000915", # with check_digit value of 5,
+        receiving_dfi_identification="072000915",  # with check_digit value of 5,
         dfi_account_number="723458745",
         amount=145330,
         individual_id_number="",
@@ -244,7 +244,7 @@ def test_ach_control(example_nacha_0):
     assert output_0 == example_nacha_0.control
 
 
-complete_nacha_0 = """101 072000915 07200091502040412090094101First National Bank    First National Bank            
+complete_nacha_0 = """101 072000915 07200091502040412090094101First National Bank    First National Bank
 5200Anderson Enterpr                    1381655417PPDPAYROLL   000000021113   1072000910000001
 6320720008057548332          0000005000               Cox, Melissa            0072000910000001
 6220720008051254356          0000026294               Cox, Melissa            0072000910000002
@@ -256,7 +256,7 @@ complete_nacha_0 = """101 072000915 07200091502040412090094101First National Ban
 6220030610205239465          0000039059               Dunn, John              0072000910000008
 627072000915723458745        0000145330               Anderson Enterprises I  0072000910000009
 820000000900980026280000001453300000001453301381655417                         072000910000001
-9000001000002000000090098002628000000145330000000145330                                       
+9000001000002000000090098002628000000145330000000145330
 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999

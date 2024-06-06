@@ -66,7 +66,7 @@ class NACHAFile:
         # position 1 2-7                   8-13                14-23                       24-29                                     30-33                                   34                     35-37                 38-39                   40                 41-63                            64-86                       87-94
         return f"""9{len(self.batches):06}{self.block_count:06}{self.entry_addenda_account:08}{self.entry_hash}{self.total_debit:0>12}{self.total_credit:0>12}{'': >39}"""
 
-    def batch_number(self, batch: 'ACHBatch') -> str:
+    def batch_number(self, batch: "ACHBatch") -> str:
         return f"{self.batches.index(batch) + 1:>07}"
 
     def __str__(self) -> str:
@@ -163,7 +163,7 @@ class ACHBatch:
     def __str__(self) -> str:
         return self()
 
-    def __call__(self, batch_number: int=1) -> str:
+    def __call__(self, batch_number: int = 1) -> str:
         output = f"{self.header}{batch_number:0>7}\n"
         output += (
             "\n".join(f"{entry()}{self.trace_number(entry)}" for entry in self.entries)
@@ -183,7 +183,7 @@ class ACHEntry:
     individual_name: str = ""
     discretionary_data: str = ""
     addenda_record_indicator: str = ""
-    batch: Optional['ACHBatch'] = None
+    batch: Optional["ACHBatch"] = None
 
     @property
     def check_digit(self) -> int:
@@ -194,20 +194,22 @@ class ACHEntry:
         """
         if not self.receiving_dfi_identification:
             return 0
-        if len(self.receiving_dfi_identification) == 9: 
-            return self.receiving_dfi_identification[8]
+        if len(self.receiving_dfi_identification) == 9:
+            return int(self.receiving_dfi_identification[8])
         # add check digit
-        s = sum([
-            int(self.receiving_dfi_identification[0]) * 3,
-            int(self.receiving_dfi_identification[1]) * 7,
-            int(self.receiving_dfi_identification[2]) * 1,
-            int(self.receiving_dfi_identification[3]) * 3,
-            int(self.receiving_dfi_identification[4]) * 7,
-            int(self.receiving_dfi_identification[5]) * 1,
-            int(self.receiving_dfi_identification[6]) * 3,
-            int(self.receiving_dfi_identification[7]) * 7
-        ])
-        return (10 - (s % 10) ) % 10
+        s = sum(
+            [
+                int(self.receiving_dfi_identification[0]) * 3,
+                int(self.receiving_dfi_identification[1]) * 7,
+                int(self.receiving_dfi_identification[2]) * 1,
+                int(self.receiving_dfi_identification[3]) * 3,
+                int(self.receiving_dfi_identification[4]) * 7,
+                int(self.receiving_dfi_identification[5]) * 1,
+                int(self.receiving_dfi_identification[6]) * 3,
+                int(self.receiving_dfi_identification[7]) * 7,
+            ]
+        )
+        return (10 - (s % 10)) % 10
 
     def __str__(self) -> str:
         # position 1 2-3                      4-11                                    12                13-29                         30-39            40-54                            55-76                           77-78                        79
