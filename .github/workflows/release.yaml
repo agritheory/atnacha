@@ -47,8 +47,6 @@ jobs:
       - name: Publish package to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         if: ${{ steps.release.outputs.released }} == 'true'
-        with:
-          repository-url: https://test.pypi.org/legacy/
 
       - name: Publish package to GitHub Release
         uses: python-semantic-release/upload-to-gh-release@main # keep version in sync
