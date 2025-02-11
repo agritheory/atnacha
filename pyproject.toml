@@ -15,8 +15,6 @@ classifiers = [
   "Intended Audience :: Developers",
   "License :: OSI Approved :: MIT License",
   "Operating System :: OS Independent",
-  "Programming Language :: Python :: 3.8",
-  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
@@ -32,13 +30,13 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.dependencies]
-python = ">=3.8,<3.14"
+python = ">=3.10,<3.14"
 
 [tool.poetry.group.dev.dependencies]
-black = "^24.4.2"
-mypy = "^1.10.0"
-pytest = "^8.2.2"
-tox = "^4.15.1"
+black = "^25.1.0"
+mypy = "^1.15.0"
+pytest = "^8.3.4"
+tox = "^4.24.1"
 tox-gh-actions = "^3.2.0"
 tox-poetry-installer = {extras = ["poetry"], version = "^1.0.0b1"}
 
@@ -53,12 +51,10 @@ legacy_tox_ini = """
 [tox]
 isolated_build = true
 skip_missing_interpreters = true
-envlist = py{38,39,310,311,312,313}-{linux,macos,windows}
+envlist = py{310,311,312,313}-{linux,macos,windows}
 
 [gh-actions]
 python =
-    3.8: py38
-    3.9: py39
     3.10: py310
     3.11: py311
     3.12: py312
