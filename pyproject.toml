@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "atnacha"
-version = "0.0.0"
+version = "0.1.0"
 description = "NACHA file generation"
 license = "MIT"
 authors = ["Tyler Matteson <tyler@agritheory.com>"]
@@ -20,6 +20,7 @@ classifiers = [
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
   "Programming Language :: Python",
   "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
   "Topic :: Internet :: WWW/HTTP",
@@ -31,7 +32,7 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.dependencies]
-python = ">=3.8,<3.13"
+python = ">=3.8,<3.14"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.4.2"
@@ -52,13 +53,16 @@ legacy_tox_ini = """
 [tox]
 isolated_build = true
 skip_missing_interpreters = true
-envlist = py{38,39,310}-{linux,macos,windows}
+envlist = py{38,39,310,311,312,313}-{linux,macos,windows}
 
 [gh-actions]
 python =
     3.8: py38
     3.9: py39
     3.10: py310
+    3.11: py311
+    3.12: py312
+    3.13: py313
 
 [gh-actions:env]
 PLATFORM =
