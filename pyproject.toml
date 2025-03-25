@@ -1,47 +1,63 @@
-[tool.poetry]
+[project]
 name = "atnacha"
-version = "0.1.0"
 description = "NACHA file generation"
-authors = ["Tyler Matteson <tyler@agritheory.com>"]
-license = "MIT"
+authors = [{ name = "AgriTheory", email = "support@agritheory.dev" }]
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+dynamic = ["dependencies", "version"]
 
-[tool.poetry.dependencies]
-python = "^3.8"
-
-[tool.poetry.dev-dependencies]
-pytest = "^6.2.5"
-pytest-coverage = "^0.0"
-mypy = "^0.971"
-pytest-mypy = "^0.9.1"
-tox-poetry-installer = {extras = ["poetry"], version = "^0.8.4"}
-tox-gh-actions = "^2.9.1"
+[project.urls]
+homepage = "https://github.com/agritheory/atnacha"
+repository = "https://github.com/agritheory/atnacha"
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 
-packages = [
-    { include = "atnacha" },
-]
+[tool.poetry]
+version = "0.1.0"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<4.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^25.1.0"
+mypy = "^1.15.0"
+pytest = "^8.3.4"
+tox = "^4.24.1"
+tox-gh-actions = "^3.3.0"
+tox-poetry-installer = {extras = ["poetry"], version = "^1.0.0b1"}
 
 [tool.tox]
 legacy_tox_ini = """
-
 [tox]
-isolated_build = True
+isolated_build = true
+skip_missing_interpreters = true
+envlist = py{310,311,312,313}-{linux,macos,windows}
 
 [gh-actions]
 python =
-    3.8: py38
-    3.9: py39
     3.10: py310
+    3.11: py311
+    3.12: py312
+    3.13: py313
+
+[gh-actions:env]
+PLATFORM =
+    ubuntu-latest: linux
+    macos-latest: macos
+    windows-latest: windows
 
 [testenv]
 alwayscopy = true
-description = Check syntax and run tests
+allowlist_externals = black, mypy, pytest
+description = check syntax, types and run unit tests
 require_locked_deps = true
-install_dev_deps = true
+poetry_dep_groups =
+    dev
 commands =
-    poetry run black . --check
-    poetry run pytest --cov=./ --cov-report=html --mypy
+    black .
+    mypy atnacha tests --ignore-missing-imports
+    pytest
 """

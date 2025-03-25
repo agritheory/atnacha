@@ -107,7 +107,7 @@ def example_entry_6():
 def example_entry_7():
     return ACHEntry(
         transaction_code=22,
-        receiving_dfi_identification="00306102", # check_digit == 10, should modulus to 0
+        receiving_dfi_identification="00306102",  # check_digit == 10, should modulus to 0
         dfi_account_number="5239465",
         amount=39059,
         individual_id_number="",
@@ -121,7 +121,7 @@ def example_entry_7():
 def example_entry_8():
     return ACHEntry(
         transaction_code=27,
-        receiving_dfi_identification="072000915", # with check_digit value of 5,
+        receiving_dfi_identification="072000915",  # with check_digit value of 5,
         dfi_account_number="723458745",
         amount=145330,
         individual_id_number="",
