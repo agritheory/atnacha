@@ -195,7 +195,7 @@ class ACHEntry:
         if not self.receiving_dfi_identification:
             return 0
         if len(self.receiving_dfi_identification) == 9:
-            return self.receiving_dfi_identification[8]
+            return int(self.receiving_dfi_identification[8])
         # add check digit
         s = sum(
             [
